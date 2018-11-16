@@ -1,0 +1,43 @@
+{% extends '/layouts/base.twig' %}
+
+{% block content %}
+    <div class="prism">
+        <div class="prism__area">
+            <div class="prism__pipette"></div>
+        </div>
+        <div class="prism__bar">
+            <div class="prism__slit"></div>
+        </div>
+        <div class="prism__panel">
+            <div class="prism__new"></div>
+            <div class="prism__current"></div>
+            <div class="prism__input prism__input--with-label">
+                <label>
+                    <span class="prism__input-label">R</span>
+                    <input type="text" value="127">
+                </label>
+            </div>
+            <div class="prism__input prism__input--with-label">
+                <label>
+                    <span class="prism__input-label">G</span>
+                    <input type="text" value="65">
+                </label>
+            </div>
+            <div class="prism__input prism__input--with-label">
+                <label>
+                    <span class="prism__input-label">B</span>
+                    <input type="text" value="255">
+                </label>
+            </div>
+            <div class="prism__input prism__input--with-label">
+                <label>
+                    <span class="prism__input-label">A</span>
+                    <input type="text" value="0.84">
+                </label>
+            </div>
+            <div class="prism__input">
+                <input title="HEX" type="text" value="#9900FF">
+            </div>
+        </div>
+    </div>
+{% endblock %}

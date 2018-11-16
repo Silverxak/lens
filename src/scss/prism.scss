@@ -1,0 +1,163 @@
+@import 'test';
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #e5e5e5;
+}
+
+$border-radius: 2px;
+
+.prism {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    backface-visibility: hidden;
+    //width: 390px;
+    //height: 276px;
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(#000, .2), 0 1px 15px rgba(#000, .15), inset 0 -1px rgba(#000, .04);
+    border-radius: 2px;
+    display: flex;
+    color: #808080;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+.prism__area {
+    position: relative;
+    width: 256px;
+    height: 256px;
+    background-color: #0080ff;
+    border-radius: ($border-radius + 3px);
+    border-top-right-radius: $border-radius;
+    margin: 10px;
+    flex-shrink: 0;
+
+    &:before,
+    &:after {
+        display: block;
+        content: '';
+        width: inherit;
+        height: inherit;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: $border-radius;
+    }
+
+    &:before {
+        background-image: linear-gradient(to right, rgba(#fff, 1) 0%, rgba(#fff, 0) 100%);
+    }
+
+    &:after {
+        background-image: linear-gradient(to top, rgba(#000, 1) 0%, rgba(#000, 0) 100%);
+    }
+}
+.prism__pipette {
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    width: 11px;
+    height: 11px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    z-index: 1;
+    border: 2px solid #fff;
+    background-color: #0080ff;
+    box-shadow: 0 0 0 1px rgba(#000, .25) inset,
+                0 0 0 1px rgba(#000, .2),
+                0 1px 3px rgba(#000, .3);
+}
+.prism__bar {
+    position: relative;
+    flex-shrink: 0;
+    margin: 10px 2px;
+    width: 20px;
+    height: 256px;
+    border-radius: $border-radius;
+    background-image: linear-gradient(to bottom,
+            #f00 0%,
+            #f0f (100% / 6 * 1),
+            #00f (100% / 6 * 2),
+            #0ff (100% / 6 * 3),
+            #0f0 (100% / 6 * 4),
+            #ff0 (100% / 6 * 5),
+            #f00 100%
+    );
+}
+.prism__slit {
+    left: 50%;
+    top: 25%;
+    transform: translateX(-50%);
+    position: absolute;
+    width: calc(100% + 8px);
+    height: 7px;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+    border-radius: ($border-radius - 1px);
+    box-shadow: 0 1px 4px rgba(#000, .4),
+                0 0 0 1px rgba(#000, .1);
+    background-color: #6a00ff;
+}
+.prism__panel {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.prism__new,
+.prism__current {
+    width: 70px;
+    height: 35px;
+}
+.prism__new {
+    border-radius: $border-radius $border-radius 0 0;
+    background-color: #3092f3;
+}
+.prism__current {
+    margin-bottom: 9px;
+    border-radius: 0 0 $border-radius $border-radius;
+    background-color: #454783;
+}
+.prism__input {
+    margin: 3px 0;
+}
+.prism__input,
+.prism__input--with-label label {
+    display: flex;
+    align-items: center;
+}
+.prism__input--with-label label {
+    width: 100%;
+}
+.prism__input-label {
+    width: 22px;
+    padding-right: 2px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+input {
+    display: block;
+    min-width: 1px;
+    flex-grow: 1;
+    max-width: 100%;
+    width: 0;
+    background-color: #ebebeb;
+    border: none;
+    padding: 0 5px;
+    height: 24px;
+    color: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    font-size: inherit;
+    outline: none;
+    border-radius: ($border-radius - .5px);
+    box-sizing: border-box;
+
+    &:hover,
+    &:focus {
+        background-color: #dbdbdb;
+    }
+}
