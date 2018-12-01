@@ -25,11 +25,9 @@ prismArea.addEventListener('mousedown', e => {
     console.log(Math.min(e.pageX - areaLeft, prismArea.clientWidth));
 
     const move = e => {
-        if (Math.min(e.pageX - areaLeft, prismArea.clientWidth) > 0 && Math.min(e.pageX - areaLeft, prismArea.clientWidth) < 256 &&
-            Math.min(e.pageY - areaTop, prismArea.clientHeight) > 0 && Math.min(e.pageY - areaTop, prismArea.clientHeight) < 256) {
-            prismPipette.style.transform = `translateX(${e.pageX - areaLeft}px) translateY(${e.pageY - areaTop}px)`;
-        }
+        prismPipette.style.transform = `translateX(${Math.max(0, Math.min(e.pageX - areaLeft, prismArea.clientWidth))}px) translateY(${Math.max(0, Math.min(e.pageY - areaTop, prismArea.clientHeight))}px)`;
 
+        console.log(e.pageX - areaLeft);
     };
     const up = e => {
         document.removeEventListener('mousemove', move, false);
@@ -43,10 +41,7 @@ prismArea.addEventListener('mousedown', e => {
 prismBar.addEventListener('mousedown', e => {
     prismSlit.style.transform = `translateY(${e.pageY - barTop}px)`;
     const move = e => {
-        console.log(`${e.pageY - barTop}`);
-        if(Math.min(e.pageY - barTop, prismBar.clientHeight) > 0 && Math.min(e.pageY - barTop, prismBar.clientHeight) < 256) {
-            prismSlit.style.transform = `translateY(${e.pageY - barTop}px)`;
-        }
+        prismSlit.style.transform = `translateY(${Math.max(0, Math.min(e.pageY - barTop, prismBar.clientHeight))}px)`;
     };
     const up = e => {
         document.removeEventListener('mousemove', move, false);
