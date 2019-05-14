@@ -1,4 +1,3 @@
-console.log(1);
 
 // const img: HTMLElement = document.querySelector('.atlas-grid-item__image');
 //
@@ -10,11 +9,10 @@ console.log(1);
 //         element.style.height = `${maxHeight}px`;
 //     });
 // }
-
 const prism = {
     h: 0,
     s: 0,
-    b: 0
+    v: 0
 };
 
 const prismArea: HTMLElement = document.querySelector('.prism__area');
@@ -135,13 +133,22 @@ function getPosPipette(e) {
 }
 
 function getPos(e) {
-    let h, s ,v : number;
-    h = Math.round(360 - (Math.max(0, Math.min(e.pageY - barTop, prismBar.clientHeight)) * 1.40625));
-    h = h == 360 ? 0 : h;
-    s = Math.floor((Math.max(0, Math.min(e.pageX - areaLeft, prismArea.clientWidth))) / 2.56);
-    v = Math.floor((256 - (Math.max(0, Math.min(e.pageY - areaTop, prismArea.clientHeight)))) / 2.56);
-    console.log({h, s, v});
-    return {h, s, v};
+    let h, s, v: number;
+    if(e.target.className == ('prism__area' || 'prism__pipette')) {
+        prism.s = Math.floor((Math.max(0, Math.min(e.pageX - areaLeft, prismArea.clientWidth))) / 2.56);
+        prism.v = Math.floor((256 - (Math.max(0, Math.min(e.pageY - areaTop, prismArea.clientHeight)))) / 2.56);
+    }
+    if(e.target.className == ('prism__bar' || 'prism__slit')) {
+        prism.h = Math.round(360 - (Math.max(0, Math.min(e.pageY - barTop, prismBar.clientHeight)) * 1.40625));
+        prism.h == 360 ? 0 : prism.h;
+    }
+    // h = Math.round(360 - (Math.max(0, Math.min(e.pageY - barTop, prismBar.clientHeight)) * 1.40625));
+    // h = h == 360 ? 0 : h;
+    // s = Math.floor((Math.max(0, Math.min(e.pageX - areaLeft, prismArea.clientWidth))) / 2.56);
+    // v = Math.floor((256 - (Math.max(0, Math.min(e.pageY - areaTop, prismArea.clientHeight)))) / 2.56);
+    console.log(e.target.className);
+    console.log(prism);
+    return prism;
 }
 
 function getPosSlit(e) {
@@ -160,6 +167,7 @@ prismArea.addEventListener('mousedown', e => {
     const move = e => {
         prismPipette.style.transform = `translateX(${Math.max(0, Math.min(e.pageX - areaLeft, prismArea.clientWidth))}px) translateY(${Math.max(0, Math.min(e.pageY - areaTop, prismArea.clientHeight))}px)`;
         getPosPipette(e);
+        getPos(e);
     };
     const up = e => {
         document.removeEventListener('mousemove', move, false);
@@ -176,7 +184,8 @@ prismBar.addEventListener('mousedown', e => {
     getPos(e);
     const move = e => {
         prismSlit.style.transform = `translateY(${Math.max(0, Math.min(e.pageY - barTop, prismBar.clientHeight))}px)`;
-        getPosSlit(e)
+        getPosSlit(e);
+        getPos(e);
     };
     const up = e => {
         document.removeEventListener('mousemove', move, false);
